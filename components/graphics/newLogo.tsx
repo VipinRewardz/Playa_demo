@@ -1,6 +1,9 @@
-export default function Portal(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
+import React from 'react';
+
+
+export default function newLogo(props: React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
         width={506}
         height={505}
         viewBox="0 0 129 41"
@@ -31,4 +34,4 @@ export default function Portal(props: React.SVGProps<SVGSVGElement>) {
         </defs>
       </svg>
     );
-}
+  };
