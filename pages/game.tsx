@@ -12,7 +12,7 @@ const SpinTheWheel: React.FC = () => {
   const [prize, setPrize] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [spinsHistory, setSpinsHistory] = useState<SpinHistory[]>([]);
-  const [audio] = useState<HTMLAudioElement | null>(typeof Audio !== 'undefined' ? new Audio('/path-to-your-spin-sound.mp3') : null);
+  const [audio] = useState<HTMLAudioElement | null>(typeof Audio !== 'undefined' ? new Audio('/spin_sound.mp3') : null);
 
   useEffect(() => {
     const storedHistory = localStorage.getItem('spinsHistory');
@@ -30,12 +30,15 @@ const SpinTheWheel: React.FC = () => {
     const randomRotation = Math.floor(Math.random() * 360) + 360 * 5;
     setRotation(prevRotation => prevRotation + randomRotation);
     
-    const winningSegment = Math.floor((randomRotation % 360) / (360 / segments.length));
-    const wonPrize = segments[segments.length - 1 - winningSegment];
+    // const winningSegment = Math.floor((randomRotation % 360) / (360 / segments.length));
+    // const wonPrize = segments[segments.length - 1 - winningSegment];
+    const segmentAngle = 360 / segments.length;
+    const winningIndex = segments.length - 1 - Math.floor((randomRotation % 360) / segmentAngle);
+    const wonPrize = segments[winningIndex];
 
     setTimeout(() => {
-      setPrize(wonPrize);
-      setIsSpinning(false);
+        setPrize(wonPrize ?? null);
+        setIsSpinning(false);
       const newHistory: SpinHistory[] = [...spinsHistory, { prize: wonPrize, date: new Date().toLocaleString() }];
       setSpinsHistory(newHistory);
       localStorage.setItem('spinsHistory', JSON.stringify(newHistory));
