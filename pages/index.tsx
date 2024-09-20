@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     return {
       props: {},
-      redirect: { destination: "/dashboard", permanent: false },
+      redirect: { destination: "/game", permanent: false },
     };
   } catch (error) {
     return { props: {} };
@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 export default function LoginPage() {
   const router = useRouter();
   const { login } = useLogin({
-    onComplete: () => router.push("/dashboard"),
+    onComplete: () => router.push("/game"),
   });
 
   return (
