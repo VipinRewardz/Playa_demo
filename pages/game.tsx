@@ -39,7 +39,8 @@ const SpinTheWheel: React.FC = () => {
     setTimeout(() => {
         setPrize(wonPrize ?? null);
         setIsSpinning(false);
-      const newHistory: SpinHistory[] = [...spinsHistory, { prize: wonPrize, date: new Date().toLocaleString() }];
+
+      const newHistory: SpinHistory[] = [...spinsHistory, { prize: wonPrize ?? 'No Prize', date: new Date().toLocaleString() }];
       setSpinsHistory(newHistory);
       localStorage.setItem('spinsHistory', JSON.stringify(newHistory));
       // Note: confetti effect removed due to potential dependency issues
