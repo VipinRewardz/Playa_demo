@@ -21,25 +21,25 @@ async function verifyToken() {
 
 
 export default function DashboardPage() {
-  const [verifyResult, setVerifyResult] = useState();
+  const [_verifyResult, _setVerifyResult] = useState();
   const router = useRouter();
   const {
     ready,
     authenticated,
     user,
-    logout,
-    linkEmail,
-    linkWallet,
-    unlinkEmail,
-    linkPhone,
-    unlinkPhone,
-    unlinkWallet,
-    linkGoogle,
-    unlinkGoogle,
-    linkTwitter,
-    unlinkTwitter,
-    linkDiscord,
-    unlinkDiscord,
+    // logout,
+    // linkEmail,
+    // linkWallet,
+    // unlinkEmail,
+    // linkPhone,
+    // unlinkPhone,
+    // unlinkWallet,
+    // linkGoogle,
+    // unlinkGoogle,
+    // linkTwitter,
+    // unlinkTwitter,
+    // linkDiscord,
+    // unlinkDiscord,
   } = usePrivy();
 
   const { fundWallet } = useFundWallet();
@@ -54,16 +54,16 @@ export default function DashboardPage() {
     }
   }, [ready, authenticated, router]);
 
-  const numAccounts = user?.linkedAccounts?.length || 0;
-  const canRemoveAccount = numAccounts > 1;
+//   const numAccounts = user?.linkedAccounts?.length || 0;
+//   const canRemoveAccount = numAccounts > 1;
 
-  const email = user?.email;
-  const phone = user?.phone;
-  const wallet = user?.wallet;
+//   const email = user?.email;
+//   const phone = user?.phone;
+//   const wallet = user?.wallet;
 
-  const googleSubject = user?.google?.subject || null;
-  const twitterSubject = user?.twitter?.subject || null;
-  const discordSubject = user?.discord?.subject || null;
+//   const googleSubject = user?.google?.subject || null;
+//   const twitterSubject = user?.twitter?.subject || null;
+//   const discordSubject = user?.discord?.subject || null;
 
   const handleFundWallet = async () => {
     if (user?.wallet?.address) {
