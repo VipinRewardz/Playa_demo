@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getAccessToken, usePrivy } from "@privy-io/react-auth";
+import {useFundWallet} from '@privy-io/react-auth';
 import Head from "next/head";
 
 async function verifyToken() {
@@ -14,6 +15,9 @@ async function verifyToken() {
 
   return await result.json();
 }
+
+
+
 
 export default function DashboardPage() {
   const [verifyResult, setVerifyResult] = useState();
@@ -37,6 +41,12 @@ export default function DashboardPage() {
     unlinkDiscord,
   } = usePrivy();
 
+  const { fundWallet } = useFundWallet();
+  const fundWalletHook = useFundWallet();
+  console.log("fundWalletHook:", fundWalletHook); // Debug log
+
+
+
   useEffect(() => {
     if (ready && !authenticated) {
       router.push("/");
@@ -53,6 +63,20 @@ export default function DashboardPage() {
   const googleSubject = user?.google?.subject || null;
   const twitterSubject = user?.twitter?.subject || null;
   const discordSubject = user?.discord?.subject || null;
+
+  const handleFundWallet = async () => {
+    if (user?.wallet?.address) {
+      try {
+        await fundWallet(user.wallet.address);
+        console.log("Wallet funded successfully");
+      } catch (error) {
+        console.error("Error funding wallet:", error);
+      }
+    } else {
+      console.error("No wallet address found for the user.");
+    }
+  };
+  
 
   return (
     <>
@@ -196,6 +220,13 @@ export default function DashboardPage() {
                 className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white border-none"
               >
                 Verify token on server
+              </button>
+
+              <button
+              onClick={handleFundWallet}
+             className="text-sm bg-violet-600 hover:bg-violet-700 py-2 px-4 rounded-md text-white border-none"
+              >
+                Mint Token
               </button>
 
               {Boolean(verifyResult) && (
