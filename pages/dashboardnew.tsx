@@ -5,6 +5,7 @@ import { getAccessToken, usePrivy } from "@privy-io/react-auth";
 import {useFundWallet} from '@privy-io/react-auth';
 import Head from "next/head";
 
+// @ts-ignore
 async function verifyToken() {
   const url = "/api/verify";
   const accessToken = await getAccessToken();
@@ -16,7 +17,6 @@ async function verifyToken() {
 
   return await result.json();
 }
-
 
 
 
